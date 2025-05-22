@@ -14,7 +14,7 @@ from telethon.tl.functions.channels import GetParticipantRequest
 
 # === Твои данные ===
 API_TOKEN = "7191754392:AAEkTU3A4tVtNmWECoxqDN9EpLlplOnsaaI"
-channel_username = "zcolibry"
+channel_username = "@zcolibry"
 API_ID = 12627945
 API_HASH = "4b283be95442ece4c10bd35199ee010a"
 
