@@ -20,7 +20,7 @@ API_ID = int(os.getenv("API_ID"))
 API_HASH = os.getenv("API_HASH")
 channel_username = os.getenv(
     "CHANNEL_USERNAME"
-)  # Важно, с @ или без — используй как в Telethon
+)  # Важно, с @ или без — использовать как в Telethon
 
 # === Инициализация ===
 bot = Bot(token=API_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
