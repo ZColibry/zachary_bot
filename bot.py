@@ -177,7 +177,7 @@ async def check_subscribe(callback: types.CallbackQuery):
         await callback.answer("Вы не подписаны на канал", show_alert=True)
 
 
-# === Отправка книги (в одном сообщении) ===
+# === Отправка книги ===
 async def send_book_file(callback, user_id, book_data):
     if book_data == "book_sleep":
         book_path = "files/zachem_my_spim.epub"
@@ -186,15 +186,41 @@ async def send_book_file(callback, user_id, book_data):
 
     file = FSInputFile(book_path)
 
-    back_button = InlineKeyboardMarkup(
+    buttons = InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton(text="Назад ⏪", callback_data="back_main")]
+            [
+                InlineKeyboardButton(
+                    text="📘 Инструкция по открытию файла", callback_data="open_guide"
+                )
+            ],
+            [InlineKeyboardButton(text="Назад ⏪", callback_data="back_main")],
         ]
     )
 
     await bot.send_document(
-        chat_id=user_id, document=file, caption="Держи книгу)", reply_markup=back_button
+        chat_id=user_id,
+        document=file,
+        caption="Держи книгу)",
+        reply_markup=buttons,
     )
+
+
+# === Инструкция по открытию файла ===
+@dp.callback_query(F.data == "open_guide")
+async def open_guide_handler(callback: types.CallbackQuery):
+    await callback.message.answer(
+        "🍏 <b>Открытие файла книги на IOS</b>\n\n"
+        "1️⃣ Скачай приложение <i>«Книги»</i> (белая книга на оранжевом фоне) из App Store.\n"
+        "2️⃣ Открой файл книги и нажми кнопку <i>«Отправить»</i> (иконка коробочки со стрелкой).\n"
+        "3️⃣ Выбери приложение <i>«Книги»</i> из списка.\n"
+        "4️⃣ Готово ✅ — книга в твоей библиотеке.\n\n"
+        "🤖 <b>Открытие файла книги на Android</b>\n\n"
+        "1️⃣ Скачай любое приложение для чтения ePub-файлов из Google Play (например, ReadEra или FBReader).\n"
+        "2️⃣ Открой файл книги в этом приложении.\n"
+        "3️⃣ Готово ✅ — книга в твоей библиотеке.",
+        reply_markup=back_to_books_menu,
+    )
+    await callback.answer()
 
 
 # === Кнопка "Сон" ===
