@@ -202,7 +202,7 @@ async def send_book_file(callback, user_id, book_data):
 async def sleep_handler(callback: types.CallbackQuery):
     await delete_message(callback)
     await callback.message.answer(
-        "Совсем скоро здесь появится моя авторская программа по сну)...",
+        "В разработке👨🏼‍💻...",
         reply_markup=back_to_main_menu,
     )
     await callback.answer()
